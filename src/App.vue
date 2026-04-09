@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SunnyIcon from 'virtual:iconify/material-symbols/sunny-outline-rounded'
 import CommitIcon from 'virtual:iconify/material-symbols/commit-rounded'
+import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 
 const { VITE_APP_VERSION: version } = import.meta.env
 </script>
@@ -15,6 +16,7 @@ const { VITE_APP_VERSION: version } = import.meta.env
     <CommitIcon class="icon" />
     {{ version }}
   </footer>
+  <VueQueryDevtools />
 </template>
 
 <style scoped></style>
