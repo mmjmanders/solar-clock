@@ -1,9 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SunnyIcon from 'virtual:iconify/material-symbols/sunny-outline-rounded'
+import CommitIcon from 'virtual:iconify/material-symbols/commit-rounded'
+
+const { VITE_APP_VERSION: version } = import.meta.env
+</script>
 
 <template>
-  <header></header>
+  <header>
+    <SunnyIcon class="icon" />
+    <h1>Solar Clock</h1>
+  </header>
   <main></main>
-  <footer></footer>
+  <footer>
+    <CommitIcon class="icon" />
+    {{ version }}
+  </footer>
 </template>
 
 <style scoped></style>

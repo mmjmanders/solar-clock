@@ -3,15 +3,71 @@
 
 @theme {
   --font-mono: 'JetBrains Mono Variable', monospace;
+  --font-headings: 'Comfortaa Variable', system-ui;
+
+  --color-sundial-stone-50: oklch(0.97 0.025 88);
+  --color-sundial-stone-200: oklch(0.9 0.06 84);
+  --color-sundial-stone-400: oklch(0.76 0.09 76);
+  --color-sundial-stone-600: oklch(0.57 0.09 68);
+  --color-sundial-stone-800: oklch(0.37 0.07 62);
+
+  --color-sundial-bronze-50: oklch(0.93 0.042 82);
+  --color-sundial-bronze-300: oklch(0.74 0.11 68);
+  --color-sundial-bronze-500: oklch(0.55 0.12 54);
+  --color-sundial-bronze-700: oklch(0.38 0.095 50);
+  --color-sundial-bronze-900: oklch(0.22 0.06 44);
+
+  --color-sundial-shadow-100: oklch(0.89 0.035 82);
+  --color-sundial-shadow-300: oklch(0.73 0.072 74);
+  --color-sundial-shadow-500: oklch(0.48 0.082 62);
+  --color-sundial-shadow-700: oklch(0.28 0.062 54);
+
+  --color-sundial-sky-midnight: oklch(0.16 0.048 278);
+  --color-sundial-sky-dawn: oklch(0.68 0.13 34);
+  --color-sundial-sky-noon: oklch(0.83 0.065 212);
+  --color-sundial-sky-golden: oklch(0.77 0.145 62);
+  --color-sundial-sky-dusk: oklch(0.28 0.105 288);
+}
+
+@layer base {
+  html,
+  body {
+    @apply bg-sundial-bronze-50 text-sundial-bronze-900;
+  }
 }
 
 @layer components {
   #app {
-    @apply h-screen grid grid-rows-[4rem_1fr_2rem] justify-items-center gap-4;
+    @apply w-full h-screen grid grid-rows-[4rem_1fr_2rem] justify-items-center gap-4;
+  }
+
+  header {
+    @apply justify-self-stretch flex justify-center items-center gap-2 border-b border-b-sundial-bronze-300;
+  }
+
+  header h1 {
+    @apply text-5xl;
+  }
+
+  header .icon {
+    @apply size-12;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-headings font-semibold;
   }
 
   footer {
-    @apply font-mono text-sm flex items-center gap-2;
+    @apply font-mono justify-self-stretch text-sm flex justify-center items-center gap-2 border-t border-t-sundial-bronze-300;
+  }
+
+  main {
+    @apply justify-self-stretch;
   }
 
   .icon {
