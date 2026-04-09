@@ -21,10 +21,13 @@
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
+    "@iconify-json/mdi": "^1.2.3",
     "tailwindcss": "^4.2.2",
     "vue": "^3.5.31"
   },
   "devDependencies": {
+    "@iconify/css-vue": "^1.0.2",
+    "@iconify/unplugin": "^0.1.5",
     "@prettier/plugin-xml": "^3.4.2",
     "@tailwindcss/vite": "^4.2.2",
     "@tsconfig/node24": "^24.0.4",

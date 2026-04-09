@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { VitePWA } from 'vite-plugin-pwa'
 import tailwindcss from '@tailwindcss/vite'
+import Icons from '@iconify/unplugin/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,6 +13,9 @@ export default defineConfig({
   plugins: [
     vue(),
     tailwindcss(),
+    Icons({
+      compiler: 'vue',
+    }),
     VitePWA({
       registerType: 'autoUpdate',
       strategies: 'generateSW',
