@@ -19,6 +19,7 @@ export const useGeoQuery = () =>
   useQuery(
     queryOptions({
       queryKey: ['geo'],
+      enabled: false,
       queryFn: async (): Promise<GeoData> => {
         const response = await fetch(`${baseUrl}/geo`)
         return response.json()
