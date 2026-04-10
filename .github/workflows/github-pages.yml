@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v5
@@ -16,6 +17,7 @@ jobs:
       - run: VITE_APP_VERSION=$(git rev-parse --short HEAD) pnpm build-only
         env:
           APP_BASE: /${{ github.event.repository.name }}/
+          VITE_GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
