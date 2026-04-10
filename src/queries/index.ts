@@ -1,1 +1,1 @@
-export * from './ipify'
+export * from './geo'

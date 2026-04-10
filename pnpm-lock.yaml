@@ -30,6 +30,9 @@ importers:
       vue:
         specifier: ^3.5.32
         version: 3.5.32(typescript@6.0.2)
+      zod:
+        specifier: ^4.3.6
+        version: 4.3.6
     devDependencies:
       '@iconify/css-vue':
         specifier: ^1.0.2
@@ -3065,6 +3068,9 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zod@4.3.6:
+    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
 
 snapshots:
 
@@ -6274,3 +6280,5 @@ snapshots:
   yaml@2.8.3: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@4.3.6: {}
