@@ -2,11 +2,9 @@
 import SunnyIcon from 'virtual:iconify/material-symbols/sunny-outline-rounded'
 import CommitIcon from 'virtual:iconify/material-symbols/commit-rounded'
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
-import { useLocation } from '@/composables'
+import SolarClock from '@/components/SolarClock.vue'
 
 const { VITE_APP_VERSION: version } = import.meta.env
-
-const { latitude, longitude } = useLocation()
 </script>
 
 <template>
@@ -15,8 +13,7 @@ const { latitude, longitude } = useLocation()
     <h1>Solar Clock</h1>
   </header>
   <main>
-    <div>{{ latitude }}</div>
-    <div>{{ longitude }}</div>
+    <SolarClock />
   </main>
   <footer>
     <CommitIcon class="icon" />

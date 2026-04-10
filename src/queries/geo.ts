@@ -5,7 +5,6 @@ const { VITE_GEO_API_BASE_URL: baseUrl } = import.meta.env
 
 const geoDataSchema = z.object({
   location: z.object({
-    timezone: z.string(),
     coordinates: z.object({
       latitude: z.number(),
       longitude: z.number(),
@@ -24,5 +23,6 @@ export const useGeoQuery = () =>
         const response = await fetch(`${baseUrl}/geo`)
         return response.json()
       },
+      staleTime: 12 * 60 * 60 * 1000,
     }),
   )
