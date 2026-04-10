@@ -11,7 +11,11 @@ const sunriseSunsetDataSchema = z.object({
   }),
 })
 
-export type SunriseSunsetData = z.infer<typeof sunriseSunsetDataSchema>
+type SunriseSunsetData = z.infer<typeof sunriseSunsetDataSchema>
+type SolarNoonData = {
+  tzid: string
+  solar_noon: number
+}
 
 export const useSunriseSunsetQuery = (
   latitude: Ref<number | undefined>,
@@ -19,7 +23,7 @@ export const useSunriseSunsetQuery = (
 ) =>
   useQuery(
     queryOptions({
-      queryKey: ['sunrisesunset', latitude, longitude],
+      queryKey: ['sunrise-sunset', latitude, longitude],
       enabled: computed(() => latitude.value != undefined && longitude.value != undefined),
       queryFn: async (): Promise<SunriseSunsetData> => {
         const response = await fetch(
@@ -27,6 +31,7 @@ export const useSunriseSunsetQuery = (
         )
         return response.json()
       },
+      select: (data): SolarNoonData => ({ tzid: data.tzid, solar_noon: data.results.solar_noon }),
       staleTime: 3 * 60 * 60 * 1000,
     }),
   )

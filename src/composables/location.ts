@@ -1,5 +1,5 @@
-import { useGeoQuery } from '@/queries'
-import { onMounted, ref } from 'vue'
+import { useGeoQuery, useReverseGeocodingQuery } from '@/queries'
+import { computed, onMounted, ref } from 'vue'
 
 export const useLocation = () => {
   const latitude = ref<number>()
@@ -10,9 +10,14 @@ export const useLocation = () => {
     longitude.value = lon
   }
   const { refetch } = useGeoQuery()
+  const { data: locationData } = useReverseGeocodingQuery(latitude, longitude)
+  const location = computed<string>(() =>
+    locationData.value ? `${locationData.value.city}, ${locationData.value.country}` : '',
+  )
+
   const fetchFromGeoApi = async () => {
     const { data } = await refetch()
-    update(data?.location.coordinates.latitude, data?.location.coordinates.longitude)
+    update(data?.latitude, data?.longitude)
   }
 
   onMounted(() => {
@@ -28,5 +33,5 @@ export const useLocation = () => {
     }
   })
 
-  return { latitude, longitude }
+  return { latitude, longitude, location }
 }
