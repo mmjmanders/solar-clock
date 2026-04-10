@@ -5,8 +5,9 @@ import { queryOptions, useQuery } from '@tanstack/vue-query'
 const { VITE_SUNRISE_SUNSET_API_BASE_URL: baseUrl } = import.meta.env
 
 const sunriseSunsetDataSchema = z.object({
+  tzid: z.string(),
   results: z.object({
-    golden_hour: z.number(),
+    solar_noon: z.number(),
   }),
 })
 
@@ -26,5 +27,6 @@ export const useSunriseSunsetQuery = (
         )
         return response.json()
       },
+      staleTime: 3 * 60 * 60 * 1000,
     }),
   )
