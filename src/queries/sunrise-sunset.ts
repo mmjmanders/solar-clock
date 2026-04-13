@@ -7,9 +7,9 @@ const { VITE_SUNRISE_SUNSET_API_BASE_URL: baseUrl } = import.meta.env
 const sunriseSunsetDataSchema = z.object({
   tzid: z.string(),
   results: z.object({
-    sunrise: z.number(),
-    solar_noon: z.number(),
-    sunset: z.number(),
+    sunrise: z.coerce.number(),
+    solar_noon: z.coerce.number(),
+    sunset: z.coerce.number(),
   }),
 })
 
@@ -34,11 +34,14 @@ export const useSunriseSunsetQuery = (
       )
       return response.json()
     },
-    select: (data: SunriseSunsetData): SolarNoonData => ({
-      tzid: data.tzid,
-      sunrise: data.results.sunrise,
-      solar_noon: data.results.solar_noon,
-      sunset: data.results.sunset,
-    }),
+    select: (data: SunriseSunsetData): SolarNoonData => {
+      const { sunrise, solar_noon, sunset } = sunriseSunsetDataSchema.parse(data).results
+      return {
+        tzid: data.tzid,
+        sunrise,
+        solar_noon,
+        sunset,
+      }
+    },
     staleTime: 3 * 60 * 60 * 1000,
   })

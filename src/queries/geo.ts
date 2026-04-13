@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/vue-query'
 const { VITE_GEO_API_BASE_URL: baseUrl } = import.meta.env
 
 const coordinatesSchema = z.object({
-  latitude: z.number(),
-  longitude: z.number(),
+  latitude: z.coerce.number(),
+  longitude: z.coerce.number(),
 })
 
 const geoDataSchema = z.object({
@@ -25,6 +25,6 @@ export const useGeoQuery = () =>
       const response = await fetch(`${baseUrl}/geo`)
       return response.json()
     },
-    select: (data: GeoData): CoordinatesData => data.location.coordinates,
+    select: (data: GeoData): CoordinatesData => coordinatesSchema.parse(data.location.coordinates),
     staleTime: 12 * 60 * 60 * 1000,
   })

@@ -31,6 +31,7 @@ export default defineConfigWithVueTs(
   {
     rules: {
       '@tanstack/query/prefer-query-options': 'off',
+      'vue/no-v-text-v-html-on-component': 'warn',
     },
   },
 )
