@@ -30,7 +30,7 @@ export default defineConfigWithVueTs(
   // Custom rules
   {
     rules: {
-      '@tanstack/query/prefer-query-options': ['warn'],
+      '@tanstack/query/prefer-query-options': 'off',
     },
   },
 )
