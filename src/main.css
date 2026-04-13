@@ -78,4 +78,8 @@
   .icon {
     @apply size-3.5;
   }
+
+  .main-content {
+    @apply w-full h-full flex flex-col items-center gap-2;
+  }
 }

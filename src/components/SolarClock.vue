@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useClock, useLocation } from '@/composables'
 import { useSunriseSunsetQuery } from '@/queries'
-import SunIcon from '@/components/SunIcon.vue'
+import SunIcon from './SunIcon.vue'
 
 const { time } = useClock()
 const { latitude, longitude, location } = useLocation()
@@ -9,11 +9,13 @@ const { data: sunriseSunsetData } = useSunriseSunsetQuery(latitude, longitude)
 </script>
 
 <template>
-  <h2>{{ location }} {{ time.getTime() }}</h2>
-  <div>
-    <svg viewBox="-500 -500 1000 1000">
-      <SunIcon v-if="sunriseSunsetData" :solar-noon="sunriseSunsetData.solar_noon" />
-    </svg>
+  <div class="main-content">
+    <h2>{{ location }}</h2>
+    <div>
+      <svg viewBox="-1000 -1000 2000 2000">
+        <SunIcon v-if="sunriseSunsetData" :solar-noon="sunriseSunsetData.solar_noon" />
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -24,7 +26,7 @@ h2 {
   @apply font-sans;
 }
 
-div {
-  @apply max-w-full h-full aspect-square flex justify-center items-center;
+div:not(.main-content) {
+  @apply max-w-full h-full aspect-square flex justify-center;
 }
 </style>
