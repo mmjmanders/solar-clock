@@ -13,7 +13,7 @@ jobs:
             - args: [--prefer-offline, --frozen-lockfile]
       - uses: actions/cache@v5
         with:
-          key: ${{ runner.os }}-eslint-cache-${{ hashFiles('pnpm-lock.yaml', 'eslint.config.ts') }}
+          key: eslint-cache-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('pnpm-lock.yaml', 'eslint.config.ts') }}
           path: |
             .eslintcache
       - run: pnpm check
