@@ -1,5 +1,5 @@
 import * as z from 'zod'
-import { queryOptions, useQuery } from '@tanstack/vue-query'
+import { useQuery } from '@tanstack/vue-query'
 
 const { VITE_GEO_API_BASE_URL: baseUrl } = import.meta.env
 
@@ -18,15 +18,13 @@ type GeoData = z.infer<typeof geoDataSchema>
 type CoordinatesData = z.infer<typeof coordinatesSchema>
 
 export const useGeoQuery = () =>
-  useQuery(
-    queryOptions({
-      queryKey: ['geo'],
-      enabled: false,
-      queryFn: async (): Promise<GeoData> => {
-        const response = await fetch(`${baseUrl}/geo`)
-        return response.json()
-      },
-      select: (data: GeoData): CoordinatesData => data.location.coordinates,
-      staleTime: 12 * 60 * 60 * 1000,
-    }),
-  )
+  useQuery({
+    queryKey: ['geo'],
+    enabled: false,
+    queryFn: async (): Promise<GeoData> => {
+      const response = await fetch(`${baseUrl}/geo`)
+      return response.json()
+    },
+    select: (data: GeoData): CoordinatesData => data.location.coordinates,
+    staleTime: 12 * 60 * 60 * 1000,
+  })
