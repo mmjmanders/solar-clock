@@ -34,7 +34,7 @@ export const useReverseGeocodingQuery = (
         )
         return response.json()
       },
-      select: (data): LocationData => data.results[0]!,
+      select: (data: ReverseGeocodingData): LocationData => data.results[0]!,
       staleTime: 3 * 60 * 60 * 1000,
     }),
   )

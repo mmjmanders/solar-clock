@@ -26,7 +26,7 @@ export const useGeoQuery = () =>
         const response = await fetch(`${baseUrl}/geo`)
         return response.json()
       },
-      select: (data): CoordinatesData => data.location.coordinates,
+      select: (data: GeoData): CoordinatesData => data.location.coordinates,
       staleTime: 12 * 60 * 60 * 1000,
     }),
   )
