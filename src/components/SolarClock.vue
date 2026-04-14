@@ -4,6 +4,7 @@ import SolarNoonPosition from './SolarNoonPosition.vue'
 import { computed, readonly, ref } from 'vue'
 import SunPosition from './SunPosition.vue'
 import DayNightShade from './DayNightShade.vue'
+import StaticContent from './StaticContent.vue'
 
 const { time } = useClock()
 const { latitude, longitude, location } = useLocation()
@@ -15,6 +16,7 @@ const minute = computed<number>(() => time.value.getMinutes())
 const radius = readonly(ref<number>(600))
 const pathLength = readonly(ref<number>(650))
 const outerRadius = readonly(ref<number>(800))
+const hourIndicatorRadius = readonly(ref<number>(900))
 </script>
 
 <template>
@@ -28,13 +30,7 @@ const outerRadius = readonly(ref<number>(800))
           :sunset="sunset"
           :radius="outerRadius"
         />
-        <circle
-          cx="0"
-          cy="0"
-          :r="radius"
-          class="stroke-sundial-bronze-300 fill-none"
-          stroke-width="2"
-        />
+        <StaticContent :radius="radius" :hourIndicatorRadius="hourIndicatorRadius" />
         <template v-if="sunrise && sunset && solarNoon">
           <SolarNoonPosition :radius="radius" :solar-noon="solarNoon" />
           <SunPosition
