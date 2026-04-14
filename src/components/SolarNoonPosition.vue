@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 const solarNoonPosition = computed<{ x: number; y: number }>(() => {
-  const time = dayjs.unix(props.solarNoon)
+  const time = dayjs(props.solarNoon)
   const offset = ((time.hour() * 60 + time.minute()) / (24 * 60)) * (2 * Math.PI)
   const x = Math.cos(offset) * props.radius
   const y = Math.sin(offset) * props.radius

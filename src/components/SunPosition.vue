@@ -31,8 +31,8 @@ const sunPosition = computed<{ x: number; y: number }>(() => {
 })
 
 const isLight = computed<boolean>(() => {
-  const sunrise = dayjs.unix(props.sunrise)
-  const sunset = dayjs.unix(props.sunset)
+  const sunrise = dayjs(props.sunrise)
+  const sunset = dayjs(props.sunset)
   const now = dayjs({ hour: props.hour, minute: props.minute })
   return now.isAfter(sunrise) && now.isBefore(sunset)
 })

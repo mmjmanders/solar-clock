@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { useClock, useLocation } from '@/composables'
-import { useSunriseSunsetQuery } from '@/queries'
+import { useClock, useLocation, useSunriseSunset } from '@/composables'
 import SolarNoonPosition from './SolarNoonPosition.vue'
 import { computed, readonly, ref } from 'vue'
 import SunPosition from './SunPosition.vue'
 
 const { time } = useClock()
 const { latitude, longitude, location } = useLocation()
-const { data: sunriseSunsetData } = useSunriseSunsetQuery(latitude, longitude)
+const { sunrise, sunset, solarNoon } = useSunriseSunset(latitude, longitude, time)
 
 const hour = computed<number>(() => time.value.getHours())
 const minute = computed<number>(() => time.value.getMinutes())
@@ -28,15 +27,15 @@ const pathLength = readonly(ref<number>(650))
           class="stroke-sundial-bronze-300 fill-none"
           stroke-width="2"
         />
-        <template v-if="sunriseSunsetData">
-          <SolarNoonPosition :radius="radius" :solar-noon="sunriseSunsetData.solar_noon" />
+        <template v-if="sunrise && sunset && solarNoon">
+          <SolarNoonPosition :radius="radius" :solar-noon="solarNoon" />
           <SunPosition
             :radius="radius"
             :path-length="pathLength"
             :hour="hour"
             :minute="minute"
-            :sunrise="sunriseSunsetData.sunrise"
-            :sunset="sunriseSunsetData.sunset"
+            :sunrise="sunrise"
+            :sunset="sunset"
           />
         </template>
       </svg>
