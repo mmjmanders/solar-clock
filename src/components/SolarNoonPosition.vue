@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import dayjs from 'dayjs'
+import { useOffset } from '@/composables'
 
 const props = defineProps<{
   solarNoon: number
   radius: number
 }>()
 
+const { offset } = useOffset()
+
 const solarNoonPosition = computed<{ x: number; y: number }>(() => {
   const time = dayjs(props.solarNoon)
-  const offset = ((time.hour() * 60 + time.minute()) / (24 * 60)) * (2 * Math.PI)
-  const x = Math.cos(offset) * props.radius
-  const y = Math.sin(offset) * props.radius
+  const position = offset(time.hour(), time.minute())
+  const x = Math.cos(position) * props.radius
+  const y = Math.sin(position) * props.radius
   return { x, y }
 })
 </script>
