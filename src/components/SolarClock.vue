@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { useClock, useLocation } from '@/composables'
+import { useLocation } from '@/composables'
 import { useSunriseSunsetQuery } from '@/queries'
 import SunIcon from './SunIcon.vue'
 
-const { time } = useClock()
 const { latitude, longitude, location } = useLocation()
 const { data: sunriseSunsetData } = useSunriseSunsetQuery(latitude, longitude)
 </script>
