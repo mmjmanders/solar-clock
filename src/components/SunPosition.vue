@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import SunnyIcon from 'virtual:iconify/material-symbols/sunny-rounded'
 import dayjs from 'dayjs'
 import objectSupport from 'dayjs/plugin/objectSupport'
+import { useOffset } from '@/composables'
 
 dayjs.extend(objectSupport)
 const props = withDefaults(
@@ -18,15 +19,15 @@ const props = withDefaults(
   { size: 64 },
 )
 
-const offset = computed<number>(
-  () => ((props.hour * 60 + props.minute) / (24 * 60)) * (2 * Math.PI),
-)
+const { offset } = useOffset()
 
-const handRotation = computed<number>(() => offset.value * (180 / Math.PI))
+const position = computed<number>(() => offset(props.hour, props.minute))
+
+const handRotation = computed<number>(() => position.value * (180 / Math.PI))
 
 const sunPosition = computed<{ x: number; y: number }>(() => {
-  const x = Math.cos(offset.value) * props.radius - props.size / 2
-  const y = Math.sin(offset.value) * props.radius - props.size / 2
+  const x = Math.cos(position.value) * props.radius - props.size / 2
+  const y = Math.sin(position.value) * props.radius - props.size / 2
   return { x, y }
 })
 
