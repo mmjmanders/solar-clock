@@ -26,4 +26,12 @@ export default defineConfigWithVueTs(
   ...pluginQuery.configs['flat/recommended-strict'],
 
   skipFormatting,
+
+  // Custom rules
+  {
+    rules: {
+      '@tanstack/query/prefer-query-options': 'off',
+      'vue/no-v-text-v-html-on-component': 'warn',
+    },
+  },
 )

@@ -1,13 +1,13 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 
 export const useClock = () => {
-  const date = ref<Date>(new Date())
+  const time = ref<Date>(new Date())
 
   let interval: number | undefined
 
   onMounted(() => {
     interval = setInterval(() => {
-      date.value = new Date()
+      time.value = new Date()
     }, 1000)
   })
 
@@ -15,5 +15,5 @@ export const useClock = () => {
     clearInterval(interval)
   })
 
-  return { date }
+  return { time }
 }
