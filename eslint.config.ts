@@ -30,6 +30,7 @@ export default defineConfigWithVueTs(
   // Custom rules
   {
     rules: {
+      'no-console': ['error', { allow: ['warn', 'error'] }],
       '@tanstack/query/prefer-query-options': 'off',
       'vue/no-v-text-v-html-on-component': 'warn',
     },

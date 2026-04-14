@@ -30,7 +30,14 @@ const pathLength = readonly(ref<number>(650))
         />
         <template v-if="sunriseSunsetData">
           <SolarNoonPosition :radius="radius" :solar-noon="sunriseSunsetData.solar_noon" />
-          <SunPosition :radius="radius" :path-length="pathLength" :hour="hour" :minute="minute" />
+          <SunPosition
+            :radius="radius"
+            :path-length="pathLength"
+            :hour="hour"
+            :minute="minute"
+            :sunrise="sunriseSunsetData.sunrise"
+            :sunset="sunriseSunsetData.sunset"
+          />
         </template>
       </svg>
     </div>
