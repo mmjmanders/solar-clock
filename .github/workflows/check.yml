@@ -3,10 +3,7 @@ on:
 
 jobs:
   check:
-    timeout-minutes: 60
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.59.1
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v5
@@ -20,14 +17,26 @@ jobs:
           path: |
             .eslintcache
       - run: pnpm check
+
+  e2e:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [ 1, 2, 3, 4 ]
+        shardTotal: [ 4 ]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v5
+        with:
+          cache: true
+          run_install: |
+            - args: [--prefer-offline, --frozen-lockfile]
       - run: pnpm exec playwright install chrome msedge
       - run: pnpm build-only --mode e2e
-      - run: pnpm test:e2e
+      - run: pnpm test:e2e --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
           HOME: /root
-      - uses: actions/upload-artifact@v7
-        if: ${{ !cancelled() }}
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
