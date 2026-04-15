@@ -6,11 +6,21 @@ const props = defineProps<{
   hourIndicatorRadius: number
 }>()
 
-const hourIndicatorInnerRadius = computed<number>(() => props.hourIndicatorRadius - 75)
+const hourIndicatorOuterRadius = computed<number>(() => props.hourIndicatorRadius + 75)
 const hourIndicatorPath = computed<string>(() =>
-  ['M', hourIndicatorInnerRadius.value, '0', 'L', props.hourIndicatorRadius, '0'].join(' '),
+  ['M', props.hourIndicatorRadius, '0', 'L', hourIndicatorOuterRadius.value, '0'].join(' '),
 )
 const hourTransform = (i: number): string => `rotate(${(360 / 24) * (i - 1)})`
+
+const subIndicatorOuterRadius = computed<number>(() => props.hourIndicatorRadius + 40)
+const subIndicatorPath = computed<string>(() =>
+  ['M', props.hourIndicatorRadius, '0', 'L', subIndicatorOuterRadius.value, '0'].join(' '),
+)
+const subIndicators = Array(24 * 5)
+  .fill(0)
+  .map((_, i) => i)
+  .filter((i) => i % 5 !== 0)
+const subTransform = (i: number): string => `rotate(${(360 / (24 * 5)) * i})`
 </script>
 
 <template>
@@ -29,6 +39,14 @@ const hourTransform = (i: number): string => `rotate(${(360 / 24) * (i - 1)})`
       stroke-width="2"
       class="stroke-sundial-shadow-700"
       :transform="hourTransform(i)"
+    />
+    <path
+      v-for="i in subIndicators"
+      :key="i"
+      :d="subIndicatorPath"
+      stroke-width="2"
+      class="stroke-sundial-shadow-700"
+      :transform="subTransform(i)"
     />
   </g>
 </template>
