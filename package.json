@@ -18,7 +18,7 @@
     "eslint": "eslint . --cache",
     "oxlint": "oxlint .",
     "test:e2e": "playwright test",
-    "check": "run-p -cl --aggregate-output eslint oxlint type-check test:e2e"
+    "check": "run-p -l --aggregate-output eslint oxlint type-check test:e2e"
   },
   "dependencies": {
     "@fontsource-variable/comfortaa": "^5.2.8",

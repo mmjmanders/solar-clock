@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import SunnyIcon from 'virtual:iconify/material-symbols/sunny-rounded'
-import dayjs from 'dayjs'
 import { useOffset } from '@/composables'
 
 const props = withDefaults(
