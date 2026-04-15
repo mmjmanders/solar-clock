@@ -16,7 +16,8 @@ const minute = computed<number>(() => time.value.getMinutes())
 const radius = readonly(ref<number>(600))
 const pathLength = readonly(ref<number>(650))
 const outerRadius = readonly(ref<number>(800))
-const hourIndicatorRadius = readonly(ref<number>(900))
+const hourIndicatorRadius = readonly(ref<number>(825))
+const textRadius = readonly(ref<number>(950))
 </script>
 
 <template>
@@ -30,7 +31,11 @@ const hourIndicatorRadius = readonly(ref<number>(900))
           :sunset="sunset"
           :radius="outerRadius"
         />
-        <StaticContent :radius="radius" :hourIndicatorRadius="hourIndicatorRadius" />
+        <StaticContent
+          :radius="radius"
+          :hourIndicatorRadius="hourIndicatorRadius"
+          :textRadius="textRadius"
+        />
         <template v-if="sunrise && sunset && solarNoon">
           <SolarNoonPosition :radius="radius" :solar-noon="solarNoon" />
           <SunPosition
