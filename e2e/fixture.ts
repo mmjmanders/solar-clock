@@ -9,7 +9,6 @@ const {
 export const test = base.extend({
   page: async ({ page }, use) => {
     await page.route(`${geoApiBaseUrl}/**`, async (route) => {
-      console.log(route.request().url())
       await route.fulfill({
         json: {
           location: {
@@ -23,7 +22,6 @@ export const test = base.extend({
     })
 
     await page.route(`${geocodingApiBaseUrl}/**`, async (route) => {
-      console.log(route.request().url())
       await route.fulfill({
         json: {
           address: {
