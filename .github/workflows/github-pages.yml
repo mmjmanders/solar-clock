@@ -17,7 +17,6 @@ jobs:
       - run: VITE_APP_VERSION=$(git rev-parse --short HEAD) pnpm build-only
         env:
           APP_BASE: /${{ github.event.repository.name }}/
-          VITE_GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist/

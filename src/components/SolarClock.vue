@@ -14,7 +14,7 @@ const hour = computed<number>(() => time.value.getHours())
 const minute = computed<number>(() => time.value.getMinutes())
 
 const radius = readonly(ref<number>(600))
-const pathLength = readonly(ref<number>(650))
+const pathLength = readonly(ref<number>(700))
 const outerRadius = readonly(ref<number>(800))
 const hourIndicatorRadius = readonly(ref<number>(825))
 const textRadius = readonly(ref<number>(950))
