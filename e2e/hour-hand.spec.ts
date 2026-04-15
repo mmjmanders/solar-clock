@@ -9,7 +9,7 @@ Array.from({ length: 24 })
     hour: i,
   }))
   .forEach(({ hour }) => {
-    test(`test hand position for hour ${hour % 24 || 24}`, async ({ page }) => {
+    test(`test hand position for hour ${hour}`, async ({ page }) => {
       await page.clock.setFixedTime(
         dayjs({ hour, minute: 0, second: 0, year: 2026, month: 3, day: 15 }).toDate(),
       )
