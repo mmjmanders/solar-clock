@@ -19,9 +19,10 @@ jobs:
           key: eslint-cache-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('pnpm-lock.yaml', 'eslint.config.ts') }}
           path: |
             .eslintcache
+      - run: pnpm check
       - run: pnpm exec playwright install chrome msedge
       - run: pnpm build-only --mode e2e
-      - run: pnpm check
+      - run: pnpm test:e2e
         env:
           HOME: /root
       - uses: actions/upload-artifact@v7
