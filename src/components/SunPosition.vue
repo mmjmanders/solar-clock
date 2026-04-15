@@ -32,16 +32,22 @@ const sunPosition = computed<{ x: number; y: number }>(() => {
 <template>
   <g transform="rotate(90)">
     <g :transform="'rotate(' + handRotation + ')'">
-      <path
-        class="stroke-sundial-bronze-300 fill-sundial-bronze-300"
-        stroke-width="4"
-        :d="'M 0 0 h ' + pathLength"
-      />
+      <path stroke-width="4" :d="'M 0 0 h ' + pathLength" />
     </g>
-    <g :transform="'translate(' + sunPosition.x + ',' + sunPosition.y + ')'">
-      <SunnyIcon :width="size" :height="size" class="text-sundial-bronze-300" />
+    <g class="sun-icon" :transform="'translate(' + sunPosition.x + ',' + sunPosition.y + ')'">
+      <SunnyIcon :width="size" :height="size" />
     </g>
   </g>
 </template>
 
-<style scoped></style>
+<style scoped>
+@reference '../main.css';
+
+path {
+  @apply stroke-sundial-bronze-300 fill-sundial-bronze-300;
+}
+
+.sun-icon {
+  @apply text-sundial-bronze-300;
+}
+</style>

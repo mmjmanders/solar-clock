@@ -21,13 +21,14 @@ const solarNoonPosition = computed<{ x: number; y: number }>(() => {
 
 <template>
   <g transform="rotate(90)">
-    <circle
-      :cx="solarNoonPosition.x"
-      :cy="solarNoonPosition.y"
-      r="8"
-      class="stroke-sundial-bronze-300 fill-sundial-bronze-300"
-    />
+    <circle :cx="solarNoonPosition.x" :cy="solarNoonPosition.y" r="8" />
   </g>
 </template>
 
-<style scoped></style>
+<style scoped>
+@reference '../main.css';
+
+circle {
+  @apply stroke-sundial-bronze-300 fill-sundial-bronze-300;
+}
+</style>

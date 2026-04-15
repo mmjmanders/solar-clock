@@ -41,9 +41,19 @@ const path = computed<string>(() =>
 
 <template>
   <g v-if="path" transform="rotate(90)">
-    <circle cx="0" cy="0" :r="radius" class="stroke-none fill-sundial-sky-noon" />
-    <path :d="path" class="stroke-none fill-sundial-sky-midnight" />
+    <circle cx="0" cy="0" :r="radius" />
+    <path :d="path" />
   </g>
 </template>
 
-<style scoped></style>
+<style scoped>
+@reference '../main.css';
+
+circle {
+  @apply stroke-none fill-sundial-sky-noon;
+}
+
+path {
+  @apply stroke-none fill-sundial-sky-midnight;
+}
+</style>
