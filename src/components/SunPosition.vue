@@ -32,6 +32,7 @@ const sunPosition = computed<{ x: number; y: number }>(() => {
 <template>
   <g transform="rotate(90)">
     <path
+      class="sun-hand"
       stroke-width="8"
       :d="'M 0 0 h ' + pathLength"
       :transform="'rotate(' + handRotation + ')'"
@@ -45,7 +46,7 @@ const sunPosition = computed<{ x: number; y: number }>(() => {
 <style scoped>
 @reference '../main.css';
 
-path {
+.sun-hand {
   @apply stroke-sundial-bronze-300 fill-sundial-bronze-300;
 }
 
