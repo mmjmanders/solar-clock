@@ -2,10 +2,8 @@
 import { computed } from 'vue'
 import SunnyIcon from 'virtual:iconify/material-symbols/sunny-rounded'
 import dayjs from 'dayjs'
-import objectSupport from 'dayjs/plugin/objectSupport'
 import { useOffset } from '@/composables'
 
-dayjs.extend(objectSupport)
 const props = withDefaults(
   defineProps<{
     radius: number
@@ -30,13 +28,6 @@ const sunPosition = computed<{ x: number; y: number }>(() => {
   const y = Math.sin(position.value) * props.radius - props.size / 2
   return { x, y }
 })
-
-const isLight = computed<boolean>(() => {
-  const sunrise = dayjs(props.sunrise)
-  const sunset = dayjs(props.sunset)
-  const now = dayjs({ hour: props.hour, minute: props.minute })
-  return now.isAfter(sunrise) && now.isBefore(sunset)
-})
 </script>
 
 <template>
@@ -49,11 +40,7 @@ const isLight = computed<boolean>(() => {
       />
     </g>
     <g :transform="'translate(' + sunPosition.x + ',' + sunPosition.y + ')'">
-      <SunnyIcon
-        :width="size"
-        :height="size"
-        :class="isLight ? 'text-sundial-bronze-300' : 'text-sundial-bronze-900'"
-      />
+      <SunnyIcon :width="size" :height="size" class="text-sundial-bronze-300" />
     </g>
   </g>
 </template>

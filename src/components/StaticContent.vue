@@ -1,10 +1,21 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useOffset } from '@/composables'
 
 const props = defineProps<{
   radius: number
   hourIndicatorRadius: number
+  textRadius: number
 }>()
+
+const { offset } = useOffset()
+
+const textPosition = (hour: number): { x: number; y: number } => {
+  const position = offset(hour, 0) + Math.PI / 2
+  const x = Math.cos(position) * props.textRadius
+  const y = Math.sin(position) * props.textRadius
+  return { x, y }
+}
 
 const hourIndicatorOuterRadius = computed<number>(() => props.hourIndicatorRadius + 75)
 const hourIndicatorPath = computed<string>(() =>
@@ -48,6 +59,16 @@ const subTransform = (i: number): string => `rotate(${(360 / (24 * 5)) * i})`
       class="stroke-sundial-shadow-700"
       :transform="subTransform(i)"
     />
+    <text
+      v-for="i in 24"
+      :key="i"
+      :x="textPosition(i).x"
+      :y="textPosition(i).y"
+      dominant-baseline="middle"
+      text-anchor="middle"
+      class="text-4xl text-sundial-bronze-300"
+      >{{ i }}</text
+    >
   </g>
 </template>
 
