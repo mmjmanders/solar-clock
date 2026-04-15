@@ -25,7 +25,7 @@ export const useReverseGeocodingQuery = (
     enabled: computed(() => latitude.value != undefined && longitude.value != undefined),
     queryFn: async (): Promise<ReverseGeocodingData> => {
       const response = await fetch(
-        `${baseUrl}?lat=${latitude.value}&lon=${longitude.value}&layer=address&format=jsonv2`,
+        `${baseUrl}/reverse?lat=${latitude.value}&lon=${longitude.value}&layer=address&format=jsonv2`,
       )
       return response.json()
     },

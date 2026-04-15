@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from './fixture'
 import objectSupport from 'dayjs/plugin/objectSupport.js'
 import dayjs from 'dayjs'
 dayjs.extend(objectSupport)
@@ -11,7 +11,7 @@ Array.from({ length: 24 })
   .forEach(({ hour }) => {
     test(`test hand position for hour ${hour % 24 || 24}`, async ({ page }) => {
       await page.clock.setFixedTime(
-        dayjs({ hour, minute: 0, second: 0, year: 2026, month: 4, day: 15 }).toDate(),
+        dayjs({ hour, minute: 0, second: 0, year: 2026, month: 3, day: 15 }).toDate(),
       )
       await page.goto('/')
       const transform = (await page.getAttribute('path.sun-hand', 'transform')) as string
