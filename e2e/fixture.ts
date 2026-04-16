@@ -47,6 +47,7 @@ export const amsterdam = base.extend({
 
 export const paris = base.extend({
   page: async ({ page, context }, use) => {
+    /* Disallow permissions for geolocation to enforce use of Geo API */
     await context.setGeolocation(null)
     await context.grantPermissions([])
 

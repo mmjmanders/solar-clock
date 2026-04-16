@@ -40,3 +40,4 @@ jobs:
       - run: pnpm test:e2e --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
           HOME: /root
+          TZ: Europe/Amsterdam
