@@ -33,9 +33,6 @@ importers:
       dayjs:
         specifier: ^1.11.20
         version: 1.11.20
-      sunrise-sunset-js:
-        specifier: ^3.2.0
-        version: 3.2.0
       tailwindcss:
         specifier: ^4.2.2
         version: 4.2.2
@@ -2747,10 +2744,6 @@ packages:
   strip-comments@2.0.1:
     resolution: {integrity: sha512-ZprKx+bBLXv067WTCALv8SSz5l2+XhpYCsVtSqlMnkAXMWDq+/ekVbl1ghqP9rUHTzv6sm/DwCOiYutU/yp1fw==}
     engines: {node: '>=10'}
-
-  sunrise-sunset-js@3.2.0:
-    resolution: {integrity: sha512-JYGgifonFnim7/f6QPmSs+5w/o+cyZ2N3mxLeq1PC2+pWW+ajcomnZFwTqXrMklFH2A3dsAE1P+6OIFnvuF25g==}
-    engines: {node: '>=18.0.0'}
 
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
@@ -5920,8 +5913,6 @@ snapshots:
       ansi-regex: 6.2.2
 
   strip-comments@2.0.1: {}
-
-  sunrise-sunset-js@3.2.0: {}
 
   supports-preserve-symlinks-flag@1.0.0: {}
 

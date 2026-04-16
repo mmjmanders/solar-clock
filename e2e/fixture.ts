@@ -4,6 +4,7 @@ import 'dotenv/config'
 const {
   VITE_GEO_API_BASE_URL: geoApiBaseUrl,
   VITE_REVERSE_GEOCODING_API_BASE_URL: geocodingApiBaseUrl,
+  VITE_SUNRISE_SUNSET_API_BASE_URL: sunriseSunsetApiBaseUrl,
 } = process.env
 
 /* This uses location permissions so no need to mock Geo API */
@@ -15,6 +16,20 @@ export const amsterdam = base.extend({
           address: {
             city: 'Amsterdam',
             country: 'Netherlands',
+          },
+        },
+      })
+    })
+
+    await page.route(`${sunriseSunsetApiBaseUrl}/**`, async (route) => {
+      await route.fulfill({
+        json: {
+          tzid: 'Europe/Amsterdam',
+          results: {
+            sunrise: 1776228301,
+            sunset: 1776228301,
+            solar_noon: 1776253372,
+            timezone: 'UTC',
           },
         },
       })
@@ -45,6 +60,20 @@ export const paris = base.extend({
           address: {
             city: 'Paris',
             country: 'France',
+          },
+        },
+      })
+    })
+
+    await page.route(`${sunriseSunsetApiBaseUrl}/**`, async (route) => {
+      await route.fulfill({
+        json: {
+          tzid: 'Europe/Amsterdam',
+          results: {
+            sunrise: 1776228301,
+            sunset: 1776228301,
+            solar_noon: 1776253372,
+            timezone: 'UTC',
           },
         },
       })
