@@ -5,7 +5,9 @@ import { useQuery } from '@tanstack/vue-query'
 const { VITE_REVERSE_GEOCODING_API_BASE_URL: baseUrl } = import.meta.env
 
 const addressSchema = z.object({
-  city: z.string(),
+  city: z.string().optional(),
+  town: z.string().optional(),
+  village: z.string().optional(),
   country: z.string(),
 })
 
@@ -25,7 +27,7 @@ export const useReverseGeocodingQuery = (
     enabled: computed(() => latitude.value != undefined && longitude.value != undefined),
     queryFn: async (): Promise<ReverseGeocodingData> => {
       const response = await fetch(
-        `${baseUrl}/reverse?lat=${latitude.value}&lon=${longitude.value}&layer=address&format=jsonv2`,
+        `${baseUrl}/reverse?lat=${latitude.value}&lon=${longitude.value}&layer=address&format=json`,
       )
       return response.json()
     },

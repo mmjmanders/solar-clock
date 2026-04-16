@@ -21,7 +21,7 @@ const solarNoonPosition = computed<{ x: number; y: number }>(() => {
 
 <template>
   <g transform="rotate(90)">
-    <circle :cx="solarNoonPosition.x" :cy="solarNoonPosition.y" r="8" />
+    <circle :cx="solarNoonPosition.x" :cy="solarNoonPosition.y" r="12" />
   </g>
 </template>
 

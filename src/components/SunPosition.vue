@@ -33,7 +33,7 @@ const sunPosition = computed<{ x: number; y: number }>(() => {
   <g transform="rotate(90)">
     <path
       class="sun-hand"
-      stroke-width="8"
+      stroke-width="4"
       :d="'M 0 0 h ' + pathLength"
       :transform="'rotate(' + handRotation + ')'"
     />
