@@ -6,15 +6,33 @@ const {
   VITE_REVERSE_GEOCODING_API_BASE_URL: geocodingApiBaseUrl,
 } = process.env
 
-export const test = base.extend({
+/* This uses location permissions so no need to mock Geo API */
+export const amsterdam = base.extend({
+  page: async ({ page }, use) => {
+    await page.route(`${geocodingApiBaseUrl}/**`, async (route) => {
+      await route.fulfill({
+        json: {
+          address: {
+            city: 'Amsterdam',
+            country: 'Netherlands',
+          },
+        },
+      })
+    })
+
+    await use(page)
+  },
+})
+
+export const paris = base.extend({
   page: async ({ page }, use) => {
     await page.route(`${geoApiBaseUrl}/**`, async (route) => {
       await route.fulfill({
         json: {
           location: {
             coordinates: {
-              latitude: 52.3542071,
-              longitude: 4.5743283,
+              latitude: 48.8587375,
+              longitude: 2.1822275,
             },
           },
         },
@@ -25,8 +43,8 @@ export const test = base.extend({
       await route.fulfill({
         json: {
           address: {
-            city: 'Amsterdam',
-            country: 'Netherlands',
+            city: 'Paris',
+            country: 'France',
           },
         },
       })

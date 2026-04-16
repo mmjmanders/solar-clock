@@ -1,4 +1,4 @@
-import { test, expect } from './fixture'
+import { amsterdam as test, expect } from './fixture'
 import objectSupport from 'dayjs/plugin/objectSupport.js'
 import dayjs from 'dayjs'
 dayjs.extend(objectSupport)
