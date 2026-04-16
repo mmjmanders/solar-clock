@@ -11,7 +11,7 @@ const props = defineProps<{
 const { offset } = useOffset()
 
 const solarNoonPosition = computed<{ x: number; y: number }>(() => {
-  const time = dayjs(props.solarNoon)
+  const time = dayjs.unix(props.solarNoon)
   const position = offset(time.hour(), time.minute())
   const x = Math.cos(position) * props.radius
   const y = Math.sin(position) * props.radius
@@ -21,13 +21,14 @@ const solarNoonPosition = computed<{ x: number; y: number }>(() => {
 
 <template>
   <g transform="rotate(90)">
-    <circle
-      :cx="solarNoonPosition.x"
-      :cy="solarNoonPosition.y"
-      r="8"
-      class="stroke-sundial-bronze-300 fill-sundial-bronze-300"
-    />
+    <circle :cx="solarNoonPosition.x" :cy="solarNoonPosition.y" r="12" />
   </g>
 </template>
 
-<style scoped></style>
+<style scoped>
+@reference '../main.css';
+
+circle {
+  @apply stroke-sundial-bronze-300 fill-sundial-bronze-300;
+}
+</style>

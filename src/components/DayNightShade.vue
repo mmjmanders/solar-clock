@@ -12,13 +12,13 @@ const props = defineProps<{
 const { offset } = useOffset()
 
 const offsetSunrise = computed<{ x: number; y: number }>(() => {
-  const date = dayjs(props.sunrise)
+  const date = dayjs.unix(props.sunrise)
   const pos = offset(date.hour(), date.minute())
   return { x: Math.cos(pos) * props.radius, y: Math.sin(pos) * props.radius }
 })
 
 const offsetSunset = computed<{ x: number; y: number }>(() => {
-  const date = dayjs(props.sunset)
+  const date = dayjs.unix(props.sunset)
   const pos = offset(date.hour(), date.minute())
   return { x: Math.cos(pos) * props.radius, y: Math.sin(pos) * props.radius }
 })
@@ -41,9 +41,19 @@ const path = computed<string>(() =>
 
 <template>
   <g v-if="path" transform="rotate(90)">
-    <circle cx="0" cy="0" :r="radius" class="stroke-none fill-sundial-sky-noon" />
-    <path :d="path" class="stroke-none fill-sundial-sky-midnight" />
+    <circle cx="0" cy="0" :r="radius" />
+    <path :d="path" />
   </g>
 </template>
 
-<style scoped></style>
+<style scoped>
+@reference '../main.css';
+
+circle {
+  @apply stroke-none fill-sundial-sky-noon;
+}
+
+path {
+  @apply stroke-none fill-sundial-sky-midnight;
+}
+</style>

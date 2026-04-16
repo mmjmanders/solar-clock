@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import SunnyIcon from 'virtual:iconify/material-symbols/sunny-rounded'
+import SunIcon from 'virtual:iconify/material-symbols/circle'
 import { useOffset } from '@/composables'
 
 const props = withDefaults(
@@ -13,7 +13,7 @@ const props = withDefaults(
     sunset: number
     size?: number
   }>(),
-  { size: 64 },
+  { size: 128 },
 )
 
 const { offset } = useOffset()
@@ -31,17 +31,26 @@ const sunPosition = computed<{ x: number; y: number }>(() => {
 
 <template>
   <g transform="rotate(90)">
-    <g :transform="'rotate(' + handRotation + ')'">
-      <path
-        class="stroke-sundial-bronze-300 fill-sundial-bronze-300"
-        stroke-width="4"
-        :d="'M 0 0 h ' + pathLength"
-      />
-    </g>
-    <g :transform="'translate(' + sunPosition.x + ',' + sunPosition.y + ')'">
-      <SunnyIcon :width="size" :height="size" class="text-sundial-bronze-300" />
+    <path
+      class="sun-hand"
+      stroke-width="4"
+      :d="'M 0 0 h ' + pathLength"
+      :transform="'rotate(' + handRotation + ')'"
+    />
+    <g class="sun-icon" :transform="'translate(' + sunPosition.x + ',' + sunPosition.y + ')'">
+      <SunIcon :width="size" :height="size" />
     </g>
   </g>
 </template>
 
-<style scoped></style>
+<style scoped>
+@reference '../main.css';
+
+.sun-hand {
+  @apply stroke-sundial-bronze-300 fill-sundial-bronze-300;
+}
+
+.sun-icon {
+  @apply text-sundial-bronze-50;
+}
+</style>

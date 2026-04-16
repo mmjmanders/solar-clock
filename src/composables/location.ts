@@ -11,9 +11,11 @@ export const useLocation = () => {
   }
   const { refetch } = useGeoQuery()
   const { data: locationData } = useReverseGeocodingQuery(latitude, longitude)
-  const location = computed<string>(() =>
-    locationData.value ? `${locationData.value.city}, ${locationData.value.country}` : '',
-  )
+  const location = computed<string>(() => {
+    const loc = locationData.value
+    const place = loc?.city || loc?.town || loc?.village
+    return [place, loc?.country].filter(Boolean).join(', ') || ''
+  })
 
   const fetchFromGeoApi = async () => {
     const { data } = await refetch()

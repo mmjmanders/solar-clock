@@ -36,19 +36,12 @@ const subTransform = (i: number): string => `rotate(${(360 / (24 * 5)) * i})`
 
 <template>
   <g>
-    <circle
-      cx="0"
-      cy="0"
-      :r="radius"
-      class="stroke-sundial-bronze-300 fill-none"
-      stroke-width="2"
-    />
+    <circle cx="0" cy="0" :r="radius" stroke-width="2" />
     <path
       v-for="i in 24"
       :key="i"
       :d="hourIndicatorPath"
       stroke-width="2"
-      class="stroke-sundial-shadow-700"
       :transform="hourTransform(i)"
     />
     <path
@@ -56,7 +49,6 @@ const subTransform = (i: number): string => `rotate(${(360 / (24 * 5)) * i})`
       :key="i"
       :d="subIndicatorPath"
       stroke-width="2"
-      class="stroke-sundial-shadow-700"
       :transform="subTransform(i)"
     />
     <text
@@ -66,10 +58,23 @@ const subTransform = (i: number): string => `rotate(${(360 / (24 * 5)) * i})`
       :y="textPosition(i).y"
       dominant-baseline="middle"
       text-anchor="middle"
-      class="text-4xl text-sundial-bronze-300"
       >{{ i }}</text
     >
   </g>
 </template>
 
-<style scoped></style>
+<style scoped>
+@reference '../main.css';
+
+circle {
+  @apply stroke-sundial-bronze-300 fill-none;
+}
+
+path {
+  @apply stroke-sundial-shadow-700;
+}
+
+text {
+  @apply text-4xl text-sundial-bronze-300;
+}
+</style>
