@@ -7,7 +7,7 @@ const {
   VITE_SUNRISE_SUNSET_API_BASE_URL: sunriseSunsetApiBaseUrl,
 } = process.env
 
-/* This uses location permissions so no need to mock Geo API */
+/* This uses location permissions, so no need to mock Geo API */
 export const amsterdam = base.extend({
   page: async ({ page, context }, use) => {
     await context.setGeolocation({
