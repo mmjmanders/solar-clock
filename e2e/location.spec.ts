@@ -6,7 +6,6 @@ test('has location set to Amsterdam, Netherlands', async ({ page }) => {
 })
 
 paris('has location set to Paris, France', async ({ page, context }) => {
-  await context.clearPermissions()
   await page.goto('/')
   await expect(page.locator('h2')).toHaveText('Paris, France')
 })

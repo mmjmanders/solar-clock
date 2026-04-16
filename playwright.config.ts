@@ -38,13 +38,6 @@ export default defineConfig({
 
     /* Set browser timezone */
     timezoneId: 'Europe/Amsterdam',
-
-    /* Emulate geolocation to Amsterdam */
-    geolocation: {
-      latitude: 52.3542071,
-      longitude: 4.5743283,
-    },
-    permissions: ['geolocation'],
   },
 
   projects: [

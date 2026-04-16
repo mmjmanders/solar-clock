@@ -9,7 +9,13 @@ const {
 
 /* This uses location permissions so no need to mock Geo API */
 export const amsterdam = base.extend({
-  page: async ({ page }, use) => {
+  page: async ({ page, context }, use) => {
+    await context.setGeolocation({
+      latitude: 52.3542071,
+      longitude: 4.5743283,
+    })
+    await context.grantPermissions(['geolocation'])
+
     await page.route(`${geocodingApiBaseUrl}/**`, async (route) => {
       await route.fulfill({
         json: {
@@ -27,7 +33,7 @@ export const amsterdam = base.extend({
           tzid: 'Europe/Amsterdam',
           results: {
             sunrise: 1776228301,
-            sunset: 1776228301,
+            sunset: 1776278444,
             solar_noon: 1776253372,
             timezone: 'UTC',
           },
@@ -40,7 +46,10 @@ export const amsterdam = base.extend({
 })
 
 export const paris = base.extend({
-  page: async ({ page }, use) => {
+  page: async ({ page, context }, use) => {
+    await context.setGeolocation(null)
+    await context.grantPermissions([])
+
     await page.route(`${geoApiBaseUrl}/**`, async (route) => {
       await route.fulfill({
         json: {
@@ -68,11 +77,11 @@ export const paris = base.extend({
     await page.route(`${sunriseSunsetApiBaseUrl}/**`, async (route) => {
       await route.fulfill({
         json: {
-          tzid: 'Europe/Amsterdam',
+          tzid: 'Europe/Paris',
           results: {
-            sunrise: 1776228301,
-            sunset: 1776228301,
-            solar_noon: 1776253372,
+            sunrise: 1776229204,
+            sunset: 1776278688,
+            solar_noon: 1776278688,
             timezone: 'UTC',
           },
         },
