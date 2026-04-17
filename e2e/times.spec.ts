@@ -27,10 +27,12 @@ import dayjs from 'dayjs'
   test(`should display correct times ${expectedTime} for Amsterdam`, async ({ page }) => {
     await page.clock.setFixedTime(dayjs(time).toDate())
     await page.goto('/')
-    const times = await page.locator('div.time > div').allTextContents()
-    expect(times).toEqual(
-      expect.arrayContaining(['06:45:01', '20:40:44', '13:42:52', expectedTime]),
-    )
+    await expect(page.locator('div.time > div')).toContainText([
+      '06:45:01',
+      '20:40:44',
+      '13:42:52',
+      expectedTime,
+    ])
   })
 })
 
@@ -60,10 +62,12 @@ import dayjs from 'dayjs'
   paris(`should display correct times ${expectedTime} for Paris`, async ({ page }) => {
     await page.clock.setFixedTime(dayjs(time).toDate())
     await page.goto('/')
-    const times = await page.locator('div.time > div').allTextContents()
-    expect(times).toEqual(
-      expect.arrayContaining(['07:00:04', '20:44:48', '13:52:26', expectedTime]),
-    )
+    await expect(page.locator('div.time > div')).toHaveText([
+      '07:00:04',
+      '20:44:48',
+      '13:52:26',
+      expectedTime,
+    ])
   })
 })
 
@@ -93,9 +97,11 @@ import dayjs from 'dayjs'
   losAngeles(`should display correct times ${expectedTime} for Los Angeles`, async ({ page }) => {
     await page.clock.setFixedTime(dayjs(time).toDate())
     await page.goto('/')
-    const times = await page.locator('div.time > div').allTextContents()
-    expect(times).toEqual(
-      expect.arrayContaining(['06:25:04', '19:27:02', '12:56:03', expectedTime]),
-    )
+    await expect(page.locator('div.time > div')).toHaveText([
+      '06:25:04',
+      '19:27:02',
+      '12:56:03',
+      expectedTime,
+    ])
   })
 })
