@@ -71,10 +71,10 @@ circle {
 }
 
 path {
-  @apply stroke-sundial-shadow-700;
+  @apply stroke-sundial-bronze-900;
 }
 
 text {
-  @apply text-4xl text-sundial-bronze-300;
+  @apply text-4xl fill-sundial-bronze-900;
 }
 </style>
