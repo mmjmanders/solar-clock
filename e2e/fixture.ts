@@ -9,6 +9,9 @@ const {
 
 /* This uses location permissions, so no need to mock Geo API */
 export const amsterdam = base.extend({
+  contextOptions: async ({ contextOptions }, use) => {
+    await use({ ...contextOptions, timezoneId: 'Europe/Amsterdam' })
+  },
   page: async ({ page, context }, use) => {
     await context.setGeolocation({
       latitude: 52.3542071,
@@ -46,6 +49,9 @@ export const amsterdam = base.extend({
 })
 
 export const paris = base.extend({
+  contextOptions: async ({ contextOptions }, use) => {
+    await use({ ...contextOptions, timezoneId: 'Europe/Paris' })
+  },
   page: async ({ page, context }, use) => {
     /* Disallow permissions for geolocation to enforce use of Geo API */
     await context.setGeolocation(null)
@@ -83,6 +89,46 @@ export const paris = base.extend({
             sunrise: 1776229204,
             sunset: 1776278688,
             solar_noon: 1776253946,
+            timezone: 'UTC',
+          },
+        },
+      })
+    })
+
+    await use(page)
+  },
+})
+
+export const losAngeles = base.extend({
+  contextOptions: async ({ contextOptions }, use) => {
+    await use({ ...contextOptions, timezoneId: 'America/Los_Angeles' })
+  },
+  page: async ({ page, context }, use) => {
+    await context.setGeolocation({
+      latitude: 34.0200392,
+      longitude: -118.7413821,
+    })
+    await context.grantPermissions(['geolocation'])
+
+    await page.route(`${geocodingApiBaseUrl}/**`, async (route) => {
+      await route.fulfill({
+        json: {
+          address: {
+            city: 'Los Angeles',
+            country: 'United States',
+          },
+        },
+      })
+    })
+
+    await page.route(`${sunriseSunsetApiBaseUrl}/**`, async (route) => {
+      await route.fulfill({
+        json: {
+          tzid: 'America/Los_Angeles',
+          results: {
+            sunrise: 1776259504,
+            sunset: 1776306422,
+            solar_noon: 1776282963,
             timezone: 'UTC',
           },
         },
