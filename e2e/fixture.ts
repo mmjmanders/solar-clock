@@ -82,7 +82,7 @@ export const paris = base.extend({
           results: {
             sunrise: 1776229204,
             sunset: 1776278688,
-            solar_noon: 1776278688,
+            solar_noon: 1776253946,
             timezone: 'UTC',
           },
         },

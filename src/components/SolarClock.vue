@@ -6,6 +6,7 @@ import SunPosition from './SunPosition.vue'
 import DayNightShade from './DayNightShade.vue'
 import StaticContent from './StaticContent.vue'
 import { useSunriseSunsetQuery } from '@/queries'
+import TimesDisplay from '@/components/TimesDisplay.vue'
 
 const { time } = useClock()
 const { latitude, longitude, location } = useLocation()
@@ -24,7 +25,7 @@ const textRadius = readonly(ref<number>(950))
 <template>
   <div class="main-content">
     <h2>{{ location }}</h2>
-    <div>
+    <div class="clock-container">
       <svg viewBox="-1000 -1000 2000 2000">
         <DayNightShade
           v-if="sunriseSunsetData"
@@ -50,6 +51,13 @@ const textRadius = readonly(ref<number>(950))
         </template>
       </svg>
     </div>
+    <TimesDisplay
+      v-if="sunriseSunsetData"
+      :sunrise="sunriseSunsetData.sunrise"
+      :sunset="sunriseSunsetData.sunset"
+      :solar-noon="sunriseSunsetData.solar_noon"
+      :current-time="time"
+    />
   </div>
 </template>
 
@@ -60,7 +68,7 @@ h2 {
   @apply font-sans;
 }
 
-div:not(.main-content) {
+.clock-container {
   @apply max-w-full h-full aspect-square flex justify-center;
 }
 </style>
