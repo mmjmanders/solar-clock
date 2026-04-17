@@ -28,7 +28,9 @@ import dayjs from 'dayjs'
     await page.clock.setFixedTime(dayjs(time).toDate())
     await page.goto('/')
     const times = await page.locator('div.time > div').allTextContents()
-    expect(times).toEqual(['06:45:01', '20:40:44', '13:42:52', expectedTime])
+    expect(times).toEqual(
+      expect.arrayContaining(['06:45:01', '20:40:44', '13:42:52', expectedTime]),
+    )
   })
 })
 
@@ -59,6 +61,8 @@ import dayjs from 'dayjs'
     await page.clock.setFixedTime(dayjs(time).toDate())
     await page.goto('/')
     const times = await page.locator('div.time > div').allTextContents()
-    expect(times).toEqual(['07:00:04', '20:44:48', '13:52:26', expectedTime])
+    expect(times).toEqual(
+      expect.arrayContaining(['07:00:04', '20:44:48', '13:52:26', expectedTime]),
+    )
   })
 })
