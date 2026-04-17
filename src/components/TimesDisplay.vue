@@ -51,10 +51,14 @@ h3 {
 }
 
 .times-container {
-  @apply grid grid-cols-2 lg:grid-cols-4 gap-2;
+  @apply grid grid-cols-2 md:grid-cols-4 gap-2;
 }
 
 .time {
   @apply flex flex-col items-center gap-1;
+}
+
+.time > div {
+  @apply font-mono text-sm;
 }
 </style>
