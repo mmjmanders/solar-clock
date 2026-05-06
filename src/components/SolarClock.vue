@@ -56,7 +56,6 @@ const textRadius = readonly(ref<number>(950))
       :sunrise="sunriseSunsetData.sunrise"
       :sunset="sunriseSunsetData.sunset"
       :solar-noon="sunriseSunsetData.solar_noon"
-      :current-time="time"
     />
   </div>
 </template>
