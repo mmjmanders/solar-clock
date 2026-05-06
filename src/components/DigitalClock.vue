@@ -8,7 +8,7 @@ const props = defineProps<{
   radius: number
 }>()
 
-const computedRadius = computed(() => props.radius - 150)
+const computedRadius = computed(() => props.radius + 150)
 const hour = computed(() => props.time.getHours())
 const minute = computed(() => props.time.getMinutes())
 const second = computed(() => props.time.getSeconds())
@@ -28,7 +28,7 @@ const displayTime = computed(() => dayjs(props.time).format('HH:mm'))
       v-for="i in 60"
       :key="i"
       stroke-width="5"
-      :d="`M 0 ${computedRadius - 25} L 0 ${computedRadius - 10}`"
+      :d="`M 0 ${computedRadius - 45} L 0 ${computedRadius - 10}`"
       :transform="`translate(${position.x}, ${position.y}) rotate(${(360 / 60) * (i - 1) + 90})`"
       :class="{ 'is-on': i - 1 <= second }"
     />
@@ -52,7 +52,7 @@ circle {
 }
 
 text {
-  @apply text-6xl font-mono text-sundial-bronze-900;
+  @apply text-9xl font-mono text-sundial-bronze-900;
 }
 
 path {
