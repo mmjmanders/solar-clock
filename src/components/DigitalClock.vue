@@ -33,6 +33,7 @@ const displayTime = computed(() => dayjs(props.time).format('HH:mm'))
       :class="{ 'is-on': i <= second }"
     />
     <text
+      class="digital-time"
       :transform="`rotate(-90 ${position.x} ${position.y})`"
       :x="position.x"
       :y="position.y"

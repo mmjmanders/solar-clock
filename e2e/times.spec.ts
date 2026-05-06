@@ -28,6 +28,7 @@ import dayjs from 'dayjs'
     await page.clock.setFixedTime(dayjs(time).toDate())
     await page.goto('/')
     await expect(page.locator('div.time > div')).toContainText(['06:45:01', '20:40:44', '13:42:52'])
+    await expect(page.locator('text.digital-time')).toHaveText(expectedTime)
   })
 })
 
@@ -58,6 +59,7 @@ import dayjs from 'dayjs'
     await page.clock.setFixedTime(dayjs(time).toDate())
     await page.goto('/')
     await expect(page.locator('div.time > div')).toHaveText(['07:00:04', '20:44:48', '13:52:26'])
+    await expect(page.locator('text.digital-time')).toHaveText(expectedTime)
   })
 })
 
@@ -88,5 +90,6 @@ import dayjs from 'dayjs'
     await page.clock.setFixedTime(dayjs(time).toDate())
     await page.goto('/')
     await expect(page.locator('div.time > div')).toHaveText(['06:25:04', '19:27:02', '12:56:03'])
+    await expect(page.locator('text.digital-time')).toHaveText(expectedTime)
   })
 })
