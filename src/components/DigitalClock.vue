@@ -30,7 +30,7 @@ const displayTime = computed(() => dayjs(props.time).format('HH:mm'))
       stroke-width="5"
       :d="`M 0 ${computedRadius - 25} L 0 ${computedRadius - 10}`"
       :transform="`translate(${position.x}, ${position.y}) rotate(${(360 / 60) * (i - 1) + 90})`"
-      :class="{ 'is-on': i <= second }"
+      :class="{ 'is-on': i - 1 <= second }"
     />
     <text
       class="digital-time"
