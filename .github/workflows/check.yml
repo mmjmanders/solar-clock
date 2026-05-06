@@ -10,10 +10,12 @@ jobs:
         with:
           cache: true
           run_install: |
-            - args: [--prefer-offline, --frozen-lockfile]
+            - args: [--prefer-offline, --frozen-lockfile, --ignore-scripts]
       - uses: actions/cache@v5
         with:
           key: eslint-cache-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('pnpm-lock.yaml', 'eslint.config.ts') }}
+          restore-keys: |
+            eslint-cache-${{ runner.os }}-${{ runner.arch }}-
           path: |
             .eslintcache
       - run: pnpm check
@@ -33,7 +35,7 @@ jobs:
         with:
           cache: true
           run_install: |
-            - args: [--prefer-offline, --frozen-lockfile]
+            - args: [--prefer-offline, --frozen-lockfile, --ignore-scripts]
       - run: pnpm exec playwright install chrome msedge
       - run: pnpm build-only --mode e2e
       - run: pnpm test:e2e --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
