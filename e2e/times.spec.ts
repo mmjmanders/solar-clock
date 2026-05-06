@@ -24,15 +24,14 @@ import dayjs from 'dayjs'
     expectedTime: '03:54:07',
   },
 ].forEach(({ time, expectedTime }) => {
-  test(`should display correct times ${expectedTime} for Amsterdam`, async ({ page }) => {
+  test(`should display correct times ${expectedTime.slice(0, 5)} for Amsterdam`, async ({
+    page,
+  }) => {
     await page.clock.setFixedTime(dayjs(time).toDate())
     await page.goto('/')
-    await expect(page.locator('div.time > div')).toContainText([
-      '06:45:01',
-      '20:40:44',
-      '13:42:52',
-      expectedTime,
-    ])
+    await expect(page.locator('div.time > div')).toContainText(['06:45:01', '20:40:44', '13:42:52'])
+    await expect(page.locator('text.digital-time')).toHaveText(expectedTime.slice(0, 5))
+    await expect(page.locator('path.is-on')).toHaveCount(Number(expectedTime.slice(6)) + 1)
   })
 })
 
@@ -59,15 +58,12 @@ import dayjs from 'dayjs'
     expectedTime: '03:54:07',
   },
 ].forEach(({ time, expectedTime }) => {
-  paris(`should display correct times ${expectedTime} for Paris`, async ({ page }) => {
+  paris(`should display correct times ${expectedTime.slice(0, 5)} for Paris`, async ({ page }) => {
     await page.clock.setFixedTime(dayjs(time).toDate())
     await page.goto('/')
-    await expect(page.locator('div.time > div')).toHaveText([
-      '07:00:04',
-      '20:44:48',
-      '13:52:26',
-      expectedTime,
-    ])
+    await expect(page.locator('div.time > div')).toHaveText(['07:00:04', '20:44:48', '13:52:26'])
+    await expect(page.locator('text.digital-time')).toHaveText(expectedTime.slice(0, 5))
+    await expect(page.locator('path.is-on')).toHaveCount(Number(expectedTime.slice(6)) + 1)
   })
 })
 
@@ -94,14 +90,14 @@ import dayjs from 'dayjs'
     expectedTime: '18:54:07',
   },
 ].forEach(({ time, expectedTime }) => {
-  losAngeles(`should display correct times ${expectedTime} for Los Angeles`, async ({ page }) => {
-    await page.clock.setFixedTime(dayjs(time).toDate())
-    await page.goto('/')
-    await expect(page.locator('div.time > div')).toHaveText([
-      '06:25:04',
-      '19:27:02',
-      '12:56:03',
-      expectedTime,
-    ])
-  })
+  losAngeles(
+    `should display correct times ${expectedTime.slice(0, 5)} for Los Angeles`,
+    async ({ page }) => {
+      await page.clock.setFixedTime(dayjs(time).toDate())
+      await page.goto('/')
+      await expect(page.locator('div.time > div')).toHaveText(['06:25:04', '19:27:02', '12:56:03'])
+      await expect(page.locator('text.digital-time')).toHaveText(expectedTime.slice(0, 5))
+      await expect(page.locator('path.is-on')).toHaveCount(Number(expectedTime.slice(6)) + 1)
+    },
+  )
 })

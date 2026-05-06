@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { useClock, useLocation } from '@/composables'
 import SolarNoonPosition from './SolarNoonPosition.vue'
-import { computed, readonly, ref } from 'vue'
+import { computed } from 'vue'
 import SunPosition from './SunPosition.vue'
 import DayNightShade from './DayNightShade.vue'
 import StaticContent from './StaticContent.vue'
 import { useSunriseSunsetQuery } from '@/queries'
 import TimesDisplay from '@/components/TimesDisplay.vue'
+import DigitalClock from '@/components/DigitalClock.vue'
 
 const { time } = useClock()
 const { latitude, longitude, location } = useLocation()
@@ -15,11 +16,12 @@ const { data: sunriseSunsetData } = useSunriseSunsetQuery(latitude, longitude)
 const hour = computed<number>(() => time.value.getHours())
 const minute = computed<number>(() => time.value.getMinutes())
 
-const radius = readonly(ref<number>(600))
-const pathLength = readonly(ref<number>(700))
-const outerRadius = readonly(ref<number>(800))
-const hourIndicatorRadius = readonly(ref<number>(825))
-const textRadius = readonly(ref<number>(950))
+const digitalClockRadius = 350
+const radius = 600
+const pathLength = 700
+const outerRadius = 800
+const hourIndicatorRadius = 825
+const textRadius = 950
 </script>
 
 <template>
@@ -48,6 +50,7 @@ const textRadius = readonly(ref<number>(950))
             :sunrise="sunriseSunsetData.sunrise"
             :sunset="sunriseSunsetData.sunset"
           />
+          <DigitalClock :time="time" :radius="digitalClockRadius" />
         </template>
       </svg>
     </div>
@@ -56,7 +59,6 @@ const textRadius = readonly(ref<number>(950))
       :sunrise="sunriseSunsetData.sunrise"
       :sunset="sunriseSunsetData.sunset"
       :solar-noon="sunriseSunsetData.solar_noon"
-      :current-time="time"
     />
   </div>
 </template>

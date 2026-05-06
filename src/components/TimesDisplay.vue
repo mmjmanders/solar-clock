@@ -6,19 +6,16 @@ const props = defineProps<{
   sunrise: number
   sunset: number
   solarNoon: number
-  currentTime: Date
 }>()
 
 const displayTimes = computed<{
   sunrise: string
   sunset: string
   solarNoon: string
-  currentTime: string
 }>(() => ({
   sunrise: dayjs.unix(props.sunrise).format('HH:mm:ss'),
   sunset: dayjs.unix(props.sunset).format('HH:mm:ss'),
   solarNoon: dayjs.unix(props.solarNoon).format('HH:mm:ss'),
-  currentTime: dayjs(props.currentTime).format('HH:mm:ss'),
 }))
 </script>
 
@@ -36,10 +33,6 @@ const displayTimes = computed<{
       <h3>Solar noon</h3>
       <div>{{ displayTimes.solarNoon }}</div>
     </div>
-    <div class="time">
-      <h3>Current time</h3>
-      <div>{{ displayTimes.currentTime }}</div>
-    </div>
   </div>
 </template>
 
@@ -51,7 +44,7 @@ h3 {
 }
 
 .times-container {
-  @apply grid grid-cols-2 md:grid-cols-4 gap-2;
+  @apply grid grid-cols-3 gap-2;
 }
 
 .time {

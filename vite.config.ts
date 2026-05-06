@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite'
 import Icons from '@iconify/unplugin/vite'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   base: process.env.APP_BASE || '/',
   plugins: [
     vue(),
@@ -17,6 +17,7 @@ export default defineConfig({
       compiler: 'vue',
     }),
     VitePWA({
+      disable: mode === 'e2e',
       registerType: 'autoUpdate',
       strategies: 'generateSW',
       manifest: {
@@ -56,4 +57,4 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-})
+}))
