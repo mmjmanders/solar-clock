@@ -3,5 +3,5 @@
  * @type {import('lint-staged').Configuration}
  */
 export default {
-  '*.{css,html,js,json,svg,ts,vue,ya?ml}': 'prettier -w --no-error-on-unmatched-pattern',
+  '*.{css,html,js,json,svg,ts,vue,yml,yaml}': 'prettier -w --no-error-on-unmatched-pattern',
 }
