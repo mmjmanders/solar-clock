@@ -16,7 +16,7 @@ const { data: sunriseSunsetData } = useSunriseSunsetQuery(latitude, longitude)
 const hour = computed<number>(() => time.value.getHours())
 const minute = computed<number>(() => time.value.getMinutes())
 
-const digitalClockRadius = 350
+const digitalClockRadius = 175
 const radius = 600
 const pathLength = 700
 const outerRadius = 800
